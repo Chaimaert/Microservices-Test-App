@@ -1,0 +1,136 @@
+/* General dashboard styling */
+.dashboard-wrapper {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+}
+
+/* Header Styling */
+.dashboard-header h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #63e0f7; /* Green color */
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for text */
+}
+
+/* Dashboard layout with flexbox */
+.dashboard-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px; /* Keeping the same gap between containers */
+}
+
+/* Left and Right sides have identical styles */
+.dashboard-left, .dashboard-right {
+    flex: 0 0 48%; /* Make them equally sized */
+    padding: 30px;
+    background-color: #d7f1e6;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Title for each section */
+.dashboard-left h3, .dashboard-right h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-left h3::before, .dashboard-right h3::before {
+    content: '';
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    background-color: #5eb9c9; /* Decorative icon */
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Buttons styling */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px; /* Keeping the same gap between buttons */
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #0e3e55; /* Green */
+    color: white;
+    width: 100%; /* Keeping buttons full width */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Textarea styling */
+textarea {
+    width: 100%;
+    padding: 120px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    resize: vertical;
+    background-color: #fff;
+    min-height: 130px; /* Keeping the same height */
+}
+
+/* Output container styling */
+.output-container {
+    padding: 120px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    min-height: 130px; /* Keeping the same height */
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Ensures the content fits well and text inside is readable */
+.output-container p {
+    margin: 0;
+}
+
+/* Optional: Add some subtle hover effects for buttons */
+button:hover {
+    transform: scale(1.05); /* Slightly grow the button on hover */
+}
+
+textarea:focus, .output-container:focus {
+    outline: none; /* Remove focus outline */
+    box-shadow: 0 0 8px rgba(94, 185, 201, 0.7); /* Soft blue focus effect */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dashboard-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .dashboard-left, .dashboard-right {
+        width: 100%; /* Make containers full-width on small screens */
+        padding: 20px;
+    }
+
+    button {
+        width: 48%;
+        padding: 10px;
+    }
+}

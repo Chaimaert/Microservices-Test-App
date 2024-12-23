@@ -1,4 +1,4 @@
-# Système d'Automatisation de Tests Logiciels Basé sur l'IA ![image](https://github.com/user-attachments/assets/161978a1-7cca-4ae8-bb9f-d6ef4eb667d1)
+# Système d'Automatisation de Tests Logiciels Basé sur l'IA https://www.flaticon.com/free-icon/artificial-intelligence_4616790
 
 
 Ce projet vise à résoudre les défis liés à la création et à l'exécution manuelle des tests logiciels unitaires grâce à un système d'automatisation basé sur une architecture microservices et utilisant des techniques d'intelligence artificielle (IA).

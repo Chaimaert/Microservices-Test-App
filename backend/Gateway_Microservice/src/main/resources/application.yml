@@ -1,0 +1,43 @@
+server:
+  port: 8080  # The Gateway Microservice will run on port 8080
+
+spring:
+  application:
+    name: gateway-microservice  # Name of the Gateway Microservice
+  cloud:
+    gateway:
+      routes:
+        # Route to Authentication Microservice
+        - id: authentication-route
+          uri: lb://authentication-microservice
+          predicates:
+            - Path=/auth/**
+
+        # Route to Test Generator Microservice
+        - id: test-generator-route
+          uri: lb://generate-test-microservice
+          predicates:
+            - Path=/generate-test/**
+
+        # Route to Report Generator Microservice
+        - id: report-generator-route
+          uri: lb://rapport-generator-microservice
+          predicates:
+            - Path=/reports/**
+
+        # Route to Test Analysis Microservice
+        - id: test-analysis-route
+          uri: lb://analyse-test-microservice
+          predicates:
+            - Path=/analysis/**
+
+    discovery:
+      locator:
+        enabled: true  # Enables dynamic discovery of microservices registered in Eureka
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  # URL for Eureka Server
+    fetch-registry: true  # Fetch the registry to discover microservices
+    register-with-eureka: true  # Register the Gateway with Eureka for discovery

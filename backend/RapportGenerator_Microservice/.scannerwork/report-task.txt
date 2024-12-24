@@ -1,0 +1,7 @@
+organization=chai-emsi
+projectKey=chai-emsi_raport-microservice
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.58741
+dashboardUrl=https://sonarcloud.io/dashboard?id=chai-emsi_raport-microservice
+ceTaskId=AZP5BqaVgDr3kuHuo7vt
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZP5BqaVgDr3kuHuo7vt

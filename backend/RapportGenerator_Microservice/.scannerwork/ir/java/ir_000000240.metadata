@@ -1,0 +1,5 @@
+com.rapport.generator.exception.ReportGenerationException#<init>(Ljava/lang/String;Ljava/lang/Throwable;)V
+false
+7cf8e060dbc2538e13f42be5f07744b3
+==
+<init> java.lang.RuntimeException#<init>(Ljava/lang/String;Ljava/lang/Throwable;)V

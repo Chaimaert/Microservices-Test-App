@@ -1,0 +1,13 @@
+com.rapport.generator.service.ReportService#saveReportMetadata(Ljava/lang/String;Ljava/lang/String;)V
+false
+9f0cbe72b800175944d8e97669c4edfe
+com.rapport.generator.model.Report#<init>()V
+com.rapport.generator.model.Report#instance-init#
+java.time.LocalDateTime#now()Ljava/time/LocalDateTime;
+java.time.LocalDateTime#toString()Ljava/lang/String;
+==
+!unknownMethod! !unknownMethod!
+setFilePath com.rapport.generator.model.Report#setFilePath(Ljava/lang/String;)V
+setGeneratedTime com.rapport.generator.model.Report#setGeneratedTime(Ljava/lang/String;)V
+setReportFormat com.rapport.generator.model.Report#setReportFormat(Ljava/lang/String;)V
+setReportName com.rapport.generator.model.Report#setReportName(Ljava/lang/String;)V

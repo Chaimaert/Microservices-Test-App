@@ -1,0 +1,7 @@
+com.rapport.generator.controller.RapportController#generateReportFromCode(Ljava/lang/String;)LResponseEntity;
+false
+016b20227221e2c8daca30e319c4b2f0
+==
+!unknownMethod! !unknownMethod!
+fetchTestScenarios com.rapport.generator.service.ReportService#fetchTestScenarios(Ljava/lang/String;)Ljava/util/List;
+generateReportFromTestResults com.rapport.generator.service.ReportService#generateReportFromTestResults(Ljava/util/List;)Ljava/lang/String;

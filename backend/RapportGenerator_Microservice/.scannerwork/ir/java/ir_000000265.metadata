@@ -1,0 +1,8 @@
+com.rapport.generator.service.ReportService#generateReportFromTestResults(Ljava/util/List;)Ljava/lang/String;
+false
+cddfb3a1afaca939c331261c71717b96
+com.rapport.generator.service.ReportService#saveReportMetadata(Ljava/lang/String;Ljava/lang/String;)V
+com.rapport.generator.service.ReportService#saveReportToFile(Ljava/util/List;Ljava/lang/String;)Ljava/lang/String;
+java.util.UUID#randomUUID()Ljava/util/UUID;
+==
+!unknownMethod! !unknownMethod!

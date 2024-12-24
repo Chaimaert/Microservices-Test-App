@@ -1,0 +1,34 @@
+
+ocom.rapport.generator.service.ReportService#getReportById(Ljava/lang/Long;)Lcom/rapport/generator/model/Report;”
+‡D:/projects/Microservices-Test-App/backend/RapportGenerator_Microservice/src/main/java/com/rapport/generator/service/ReportService.javaŒ Œ("1*¢
+1
+ (>
+<
+
+ (
+%0"__id*"
+
+__unknown_file (
+""±
+®
+
+Ž Ž(7
+%11com.rapport.generator.repository.ReportRepository"__id*a
+
+__unknown_file (E*C-
++com.rapport.generator.service.ReportService"
+reportRepository†
+ƒ
+
+ (h
+%2"__declareFunction*\
+
+__unknown_file (@>
+<__sonar_lambda_0$com.rapport.generator.service.ReportService"
+
+Ž (j
+"":"
+
+Œ  Œ('
+idjava.lang.LongB/-
++com.rapport.generator.service.ReportServiceH

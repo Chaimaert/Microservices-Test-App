@@ -1,0 +1,24 @@
+
+Kcom.rapport.generator.service.ReportService#getAllReports()Ljava/util/List;”
+‡D:/projects/Microservices-Test-App/backend/RapportGenerator_Microservice/src/main/java/com/rapport/generator/service/ReportService.java’ ’(%"1*™
+1
+“ “(>
+<
+
+“ “(
+%0"__id*"
+
+__unknown_file (
+""±
+®
+
+” ”(7
+%11com.rapport.generator.repository.ReportRepository"__id*a
+
+__unknown_file (E*C-
++com.rapport.generator.service.ReportService"
+reportRepository"
+
+” ”(*
+""B/-
++com.rapport.generator.service.ReportServiceH

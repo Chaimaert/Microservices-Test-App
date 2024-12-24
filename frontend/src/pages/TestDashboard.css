@@ -1,4 +1,24 @@
 /* General dashboard styling */
+.reports-button-container {
+    display: flex;                /* Use flexbox for centering */
+    justify-content: center;      /* Center horizontally */
+    margin-top: 20px;            /* Optional: add some spacing from above */
+}
+.reports-button {
+    width: 100px; /* Set a specific width */
+    padding: 15px 10px; /* Adjust padding if needed */
+    font-size: 12px; /* Adjust font size */
+    margin: 5px; /* Optional: adjust margin */
+    background-color: #0e3e55; /* Button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.reports-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
 .dashboard-wrapper {
     font-family: 'Arial', sans-serif;
     margin: 0;

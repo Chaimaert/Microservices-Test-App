@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
-import './TestDashboard.css'; // Import the CSS file for styling
+import React, { useState } from 'react'; 
+import { useNavigate } from 'react-router-dom'; // Pour la navigation
+import './TestDashboard.css'; // Importer le fichier CSS pour le style
 
 function TestDashboard() {
-  const [code, setCode] = useState('');  // State to hold the code input by the user
-  const [output, setOutput] = useState(''); // State to hold the output of the test analysis or report
+  const [code, setCode] = useState('');  // State pour le code utilisateur
+  const [output, setOutput] = useState(''); // State pour l'output
+  const navigate = useNavigate(); // Hook pour la navigation
 
-  // Function to handle the change in the textarea (code input)
+  // Gérer les changements dans le champ texte
   const handleCodeChange = (event) => {
     setCode(event.target.value);
   };
 
-  // Function to handle the report generation (just a placeholder for now)
+  // Placeholder pour la génération de rapports
   const handleGenerateReport = () => {
-    setOutput('Report generated: The code has been analyzed and a report is generated.'); // Example output
+    setOutput('Report generated: The code has been analyzed and a report is generated.');
   };
 
-  // Function to handle test analysis (just a placeholder for now)
+  // Placeholder pour l'analyse des tests
   const handleAnalyzeTests = () => {
-    setOutput('Tests analyzed: The code has been analyzed for potential test cases and errors.'); // Example output
+    setOutput('Tests analyzed: The code has been analyzed for potential test cases and errors.');
   };
 
   return (
@@ -27,7 +29,7 @@ function TestDashboard() {
       </div>
 
       <div className="dashboard-content">
-        {/* Left side: Code input and Analyze Tests button */}
+        {/* Partie gauche : Input de code */}
         <div className="dashboard-left">
           <h3>Enter Your Code to Test</h3>
           <textarea
@@ -36,20 +38,30 @@ function TestDashboard() {
             placeholder="Write or paste your source code here..."
           />
           <div className="button-container">
-            <button onClick={handleAnalyzeTests}>Analyze Tests</button>
+            <button onClick={handleAnalyzeTests}>Generate Test</button>
           </div>
         </div>
 
-        {/* Right side: Output and Generate Report button */}
+        {/* Partie droite : Output */}
         <div className="dashboard-right">
           <h3>Output</h3>
           <div className="output-container">
             <p>{output || 'The result of your code analysis will appear here.'}</p>
           </div>
           <div className="button-container">
-            <button onClick={handleGenerateReport}>Generate Report</button>
+            <button onClick={handleGenerateReport}>Analyze Code</button>
           </div>
         </div>
+      </div>
+
+      {/* Bouton Reports en bas */}
+      <div className="reports-button-container">
+        <button
+          className="reports-button"
+          onClick={() => navigate('/reports')} // Redirection vers la page des rapports
+        >
+          Reports
+        </button>
       </div>
     </div>
   );

@@ -1,0 +1,85 @@
+
+mcom.rapport.generator.service.ReportService#generateReportFromTestResults(Ljava/util/List;)Ljava/lang/String;’
+‡D:/projects/Microservices-Test-App/backend/RapportGenerator_Microservice/src/main/java/com/rapport/generator/service/ReportService.javaL L(/"1*Ù
+
+1M M(<
+:
+M M(
+%0"__id*"
+
+__unknown_file (
+""
+}
+N. N(?
+%1java.util.UUID"+java.util.UUID#randomUUID()Ljava/util/UUID;*.
+
+__unknown_file ("
+java.util.UUIDq
+o
+N N(?
+%2java.lang.String"__concat*
+N N(+
+JUnit_Report_*"
+N. N(?
+
+%1java.util.UUIDj
+h
+N N(H
+%3java.lang.String"__concat*$
+N N(?
+
+%2java.lang.String*
+NB N(H
+.pdfh
+f
+N N(I
+
+reportNamejava.lang.String"__id*4
+
+__unknown_file (
+
+%3java.lang.Stringã
+à
+O O(E
+%4java.lang.String"rcom.rapport.generator.service.ReportService#saveReportToFile(Ljava/util/List;Ljava/lang/String;)Ljava/lang/String;*K
+
+__unknown_file (/-
++com.rapport.generator.service.ReportService*=
+
+__unknown_file (!
+
+testScenariosjava.util.List*<
+
+__unknown_file ( 
+
+
+reportNamejava.lang.Stringf
+d
+O O(F
+filePathjava.lang.String"__id*4
+
+__unknown_file (
+
+%4java.lang.StringÇ
+Ä
+P P(0
+
+%5void"ecom.rapport.generator.service.ReportService#saveReportMetadata(Ljava/lang/String;Ljava/lang/String;)V*K
+
+__unknown_file (/-
++com.rapport.generator.service.ReportService*<
+
+__unknown_file ( 
+
+
+reportNamejava.lang.String*:
+
+__unknown_file (
+
+filePathjava.lang.String"*
+Q Q(
+
+filePathjava.lang.String:+
+L0 L(P
+testScenariosjava.util.ListB/-
++com.rapport.generator.service.ReportServiceH

@@ -1,0 +1,6 @@
+com.rapport.generator.controller.RapportController#listAllReports()LResponseEntity;
+false
+fa993f38709723bb64e1cb7a534c1eee
+==
+!unknownMethod! !unknownMethod!
+getAllReports com.rapport.generator.service.ReportService#getAllReports()Ljava/util/List;

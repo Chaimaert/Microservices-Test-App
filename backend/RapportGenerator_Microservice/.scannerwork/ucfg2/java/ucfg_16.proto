@@ -1,0 +1,16 @@
+
+Dcom.rapport.generator.model.Report#getReportName()Ljava/lang/String;ˆ
+~D:/projects/Microservices-Test-App/backend/RapportGenerator_Microservice/src/main/java/com/rapport/generator/model/Report.java ("1*³
+1 (~
+|
+ (
+%0java.lang.String"__id*R
+
+__unknown_file (6*4$
+"com.rapport.generator.model.Report"
+
+reportName"$
+ (
+
+%0java.lang.StringB&$
+"com.rapport.generator.model.ReportH

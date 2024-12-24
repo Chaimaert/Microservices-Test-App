@@ -1,0 +1,5 @@
+com.rapport.generator.exception.ReportNotFoundException#<init>(Ljava/lang/String;)V
+false
+154a46891cb43c3596a7e10926713914
+==
+<init> java.lang.RuntimeException#<init>(Ljava/lang/String;)V

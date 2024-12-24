@@ -1,0 +1,15 @@
+
+:com.rapport.generator.model.Report#getId()Ljava/lang/Long;ˆ
+~D:/projects/Microservices-Test-App/backend/RapportGenerator_Microservice/src/main/java/com/rapport/generator/model/Report.java ("1*§
+1 (t
+r
+ (
+%0java.lang.Long"__id*J
+
+__unknown_file (.*,$
+"com.rapport.generator.model.Report"
+id""
+ (
+
+%0java.lang.LongB&$
+"com.rapport.generator.model.ReportH

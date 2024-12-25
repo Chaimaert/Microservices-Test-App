@@ -1,73 +1,61 @@
-import React, { useState } from 'react';
-import './ReportsPage.css'; // Style optionnel
+import React, { useEffect, useState } from "react";
+import { fetchAllReports, downloadReport } from "./api";
+import "./ReportsPage.css";
 
 function ReportsPage() {
-  // Example report data
-  const reports = [
-    { id: 1, name: 'Test Report 1', url: 'https://example.com/report1.pdf' },
-    { id: 2, name: 'Test Report 2', url: 'https://example.com/report2.pdf' },
-    { id: 3, name: 'Test Report 3', url: 'https://example.com/report3.pdf' },
-    { id: 4, name: 'Test Report 4', url: 'https://example.com/report4.pdf' },
-    { id: 5, name: 'Test Report 5', url: 'https://example.com/report5.pdf' },
-    { id: 6, name: 'Test Report 6', url: 'https://example.com/report6.pdf' },
-  ];
+  const [reports, setReports] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const reportsPerPage = 3;
+  useEffect(() => {
+    const loadReports = async () => {
+      setLoading(true);
+      try {
+        const reportData = await fetchAllReports();
+        setReports(reportData);
+      } catch (error) {
+        console.error("Error fetching reports:", error);
+        alert("Error loading reports.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Calculate the indexes for the current reports
-  const indexOfLastReport = currentPage * reportsPerPage;
-  const indexOfFirstReport = indexOfLastReport - reportsPerPage;
-  const currentReports = reports.slice(indexOfFirstReport, indexOfLastReport);
+    loadReports();
+  }, []);
 
-  // Handle pagination
-  const totalPages = Math.ceil(reports.length / reportsPerPage);
+  const handleDownload = async (reportId) => {
+    try {
+      const fileData = await downloadReport(reportId);
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+      // Create a Blob from the file data
+      const blob = new Blob([fileData], { type: "application/pdf" });
 
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      // Create a temporary URL and trigger the download
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `Report-${reportId}.pdf`;
+      link.click();
+    } catch (error) {
+      console.error("Error downloading report:", error);
+      alert("Error downloading the report.");
     }
   };
 
   return (
     <div className="reports-wrapper">
-      <h2 className="reports-title">Test Reports</h2>
-      <div className="reports-list">
-        {currentReports.map((report) => (
-          <div key={report.id} className="report-item">
-            <span className="report-text">{report.name}</span>
-            <button
-              onClick={() => window.open(report.url, '_blank')}
-              className="download-button"
-            >
-              Download
-            </button>
-          </div>
-        ))}
-      </div>
-      <div className="pagination-controls">
-        <button
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-          className="pagination-button"
-        >
-          Previous
-        </button>
-        
-        <button
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-          className="pagination-button"
-        >
-          Next
-        </button>
-      </div>
+      <h2>Available Reports</h2>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="reports-list">
+          {reports.map((report) => (
+            <div key={report.id} className="report-item">
+              <span>{report.name}</span>
+              <button onClick={() => handleDownload(report.id)}>Download</button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

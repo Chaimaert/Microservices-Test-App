@@ -1,35 +1,65 @@
-import React, { useState } from 'react'; 
-import { useNavigate } from 'react-router-dom'; // Pour la navigation
-import './TestDashboard.css'; // Importer le fichier CSS pour le style
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  fetchGeneratedTest,
+  fetchTestAnalysis,
+  generateReportFromCode,
+} from "./api";
+import "./TestDashboard.css";
 
 function TestDashboard() {
-  const [code, setCode] = useState('');  // State pour le code utilisateur
-  const [output, setOutput] = useState(''); // State pour l'output
-  const navigate = useNavigate(); // Hook pour la navigation
+  const [code, setCode] = useState(""); // User's input code
+  const [output, setOutput] = useState(""); // Output for tests/analysis
+  const [loading, setLoading] = useState(false); // Loading state
+  const navigate = useNavigate();
 
-  // Gérer les changements dans le champ texte
   const handleCodeChange = (event) => {
     setCode(event.target.value);
   };
 
-  // Placeholder pour la génération de rapports
-  const handleGenerateReport = () => {
-    setOutput('Report generated: The code has been analyzed and a report is generated.');
+  const handleGenerateTest = async () => {
+    setLoading(true);
+    try {
+      const result = await fetchGeneratedTest({ code });
+      setOutput(result); // Display test output
+    } catch (error) {
+      setOutput("Error generating test. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Placeholder pour l'analyse des tests
-  const handleAnalyzeTests = () => {
-    setOutput('Tests analyzed: The code has been analyzed for potential test cases and errors.');
+  const handleAnalyzeCode = async () => {
+    setLoading(true);
+    try {
+      const analysisResult = await fetchTestAnalysis({ code });
+      setOutput(analysisResult); // Display analysis output
+    } catch (error) {
+      setOutput("Error analyzing code. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGenerateReport = async () => {
+    setLoading(true);
+    try {
+      await generateReportFromCode(code); // Generate the report
+      navigate("/reports"); // Redirect to the reports page
+    } catch (error) {
+      alert("Error generating report. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="dashboard-wrapper">
       <div className="dashboard-header">
-        <h2>Test Scenarios Dashboard</h2>
+        <h2>AI Test Automation</h2>
       </div>
 
       <div className="dashboard-content">
-        {/* Partie gauche : Input de code */}
         <div className="dashboard-left">
           <h3>Enter Your Code to Test</h3>
           <textarea
@@ -38,29 +68,32 @@ function TestDashboard() {
             placeholder="Write or paste your source code here..."
           />
           <div className="button-container">
-            <button onClick={handleAnalyzeTests}>Generate Test</button>
+            <button onClick={handleGenerateTest} disabled={loading}>
+              Generate Test
+            </button>
           </div>
         </div>
 
-        {/* Partie droite : Output */}
         <div className="dashboard-right">
           <h3>Output</h3>
           <div className="output-container">
-            <p>{output || 'The result of your code analysis will appear here.'}</p>
+            <p>{output || "The result of your code analysis will appear here."}</p>
           </div>
           <div className="button-container">
-            <button onClick={handleGenerateReport}>Analyze Code</button>
+            <button onClick={handleAnalyzeCode} disabled={loading}>
+              Analyze Code
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Bouton Reports en bas */}
       <div className="reports-button-container">
         <button
           className="reports-button"
-          onClick={() => navigate('/reports')} // Redirection vers la page des rapports
+          onClick={handleGenerateReport}
+          disabled={loading}
         >
-          Reports
+          Generate Report
         </button>
       </div>
     </div>

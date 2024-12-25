@@ -1,10 +1,9 @@
-package com.microservice.UserService.auth;
+package com.javaguides.MyFirst_SpringApp.sec.auth;
 
-import com.microservice.UserService.config.JwtService;
-import com.microservice.UserService.entities.Role;
-import com.microservice.UserService.entities.User;
-import com.microservice.UserService.repo.UserRepository;
-import lombok.RequiredArgsConstructor;
+import com.javaguides.MyFirst_SpringApp.sec.config.JwtService;
+import com.javaguides.MyFirst_SpringApp.sec.entities.Role;
+import com.javaguides.MyFirst_SpringApp.sec.entities.User;
+import com.javaguides.MyFirst_SpringApp.sec.repo.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,12 +11,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
+
 public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
+    public AuthenticationService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+    }
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()

@@ -1,4 +1,4 @@
-package com.microservice.UserService.config;
+package com.javaguides.MyFirst_SpringApp.sec.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

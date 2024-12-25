@@ -1,19 +1,25 @@
-package com.microservice.UserService.DTO;
+package com.javaguides.MyFirst_SpringApp.sec.auth;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-@Data
 
-public class UserProfile {
+@Builder
+public class RegisterRequest {
+
     private String username;
     private String email;
-    private List<String> roles;
+    private String password;
 
-    public UserProfile(String username, String email, List<String> roles) {
+    public RegisterRequest() {
+    }
+
+    public RegisterRequest(String username, String email, String password) {
         this.username = username;
         this.email = email;
-        this.roles = roles;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -32,11 +38,11 @@ public class UserProfile {
         this.email = email;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public String getPassword() {
+        return password;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

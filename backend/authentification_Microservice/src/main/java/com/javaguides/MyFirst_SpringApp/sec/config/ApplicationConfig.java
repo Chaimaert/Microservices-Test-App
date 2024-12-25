@@ -1,7 +1,7 @@
-package com.microservice.UserService.config;
+package com.javaguides.MyFirst_SpringApp.sec.config;
 
 
-import com.microservice.UserService.repo.UserRepository;
+import com.javaguides.MyFirst_SpringApp.sec.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -71,10 +71,52 @@ Le projet est basé sur une architecture microservices. Chaque microservice gèr
 
 ## Prérequis
 
+- Java : Version 17 installée.
+- Node.js : Version 16+ installée (inclut npm).
+- MySQL : Une instance de base de données MySQL configurée.
+- Postman : Pour tester les API (facultatif).
+- Git : Pour cloner le projet.
 
+1. Clone the repository:
+   ```
+   git clone https://github.com/Chaimaert/Microservices-Test-App.git
 
+2. Configuration de la Base de Données :
+   - Créez une base de données pour chaque microservice : 
+         CREATE DATABASE app_db;
+
+   - Configurez les informations de connexion dans les fichiers application.properties de chaque microservice :
+         spring.datasource.url=jdbc:mysql://localhost:3306/app_db
+         spring.datasource.username=root
+         spring.datasource.password=<votre-mot-de-passe>
+         
+3. Démarrage des Microservices Backend :
+   - Accédez au répertoire de chaque microservice.
+   - Compilez et exécutez avec Maven :
+     ```
+     mvn clean install
+     mvn spring-boot:run
+     
+   - Ordre recommandé :
+      . Lancer le serveur Eureka (port : 8761).
+      . Lancer les microservices suivants :
+          Authentification (8084).
+          Génération de Tests (8082).
+          Analyse de Code (8083).
+          Génération de Rapports (8081).
+          Gateway API (9090).
+   
+4. Démarrage du Frontend :
+   
+   4.1 Accédez au répertoire du projet React :
+        cd frontend
+  4.2 Installez les dépendances :
+        npm install
+        
+  4.3 Lancer l'application : 
+        npm install
+  
 ## Démonstration
-
 
 https://github.com/user-attachments/assets/aec8a737-2719-43de-980e-09e81f00685b
 

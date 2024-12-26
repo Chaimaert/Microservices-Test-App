@@ -15,7 +15,6 @@ public class Report {
     private String reportFormat;
     private String filePath;
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

@@ -39,6 +39,9 @@ public class ReportService {
     @Value("${test.generator.url}")
     private String testGeneratorUrl;
 
+    @Value("${code.analyzer.url}")
+    private String codeAnalyzerUrl;
+
     private final ReportRepository reportRepository;
     private final MessageSource messageSource;
 
@@ -52,7 +55,7 @@ public class ReportService {
         return messageSource.getMessage(key, args, locale);
     }
 
-    // Fetch Test Scenarios from Test Generator Microservice
+    // Fetch Test Scenarios from GenerateTest Microservice
     public List<TestScenario> fetchTestScenarios(String code) {
         logger.info("Fetching test scenarios for code: {}", code);
         RestTemplate restTemplate = new RestTemplate();
@@ -72,16 +75,53 @@ public class ReportService {
         }
     }
 
-    // Generate Report from Test Scenarios
-    public String generateReportFromTestResults(List<TestScenario> testScenarios) {
-        logger.info("Generating report from test scenarios");
-        String reportName = "JUnit_Report_" + UUID.randomUUID() + ".pdf";
-        String filePath = saveReportToFile(testScenarios, reportName);
+    // Fetch Code Analysis Result from AnalyzeCode Microservice
+    public String fetchCodeAnalysis(String code) {
+        logger.info("Fetching code analysis result for code");
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> request = new HttpEntity<>(code, headers);
+
+        try {
+            ResponseEntity<String> response = restTemplate.postForEntity(
+                    codeAnalyzerUrl, request, String.class
+            );
+
+            if (response.getStatusCode() == HttpStatus.OK) {
+                return response.getBody();
+            } else {
+                logger.warn("No analysis result received from the Code Analyzer Microservice");
+                return "No analysis result found.";
+            }
+        } catch (Exception e) {
+            logger.error("Error while fetching analysis result: {}", e.getMessage());
+            throw new RuntimeException("Error fetching analysis result");
+        }
+    }
+
+    // Generate Comprehensive Report
+    public String generateComprehensiveReport(String code) {
+        // Step 1: Fetch test scenarios
+        List<TestScenario> testScenarios = fetchTestScenarios(code);
+
+        // Step 2: Fetch code analysis result
+        String codeAnalysisResult = fetchCodeAnalysis(code);
+
+        // Step 3: Generate report combining both results
+        return generateReportFromResults(testScenarios, codeAnalysisResult);
+    }
+
+    private String generateReportFromResults(List<TestScenario> testScenarios, String codeAnalysisResult) {
+        logger.info("Generating comprehensive report");
+        String reportName = "Comprehensive_Report_" + UUID.randomUUID() + ".pdf";
+        String filePath = saveReportToFile(testScenarios, codeAnalysisResult, reportName);
         saveReportMetadata(reportName, filePath);
         return filePath;
     }
 
-    private String saveReportToFile(List<TestScenario> testScenarios, String reportName) {
+    private String saveReportToFile(List<TestScenario> testScenarios, String codeAnalysisResult, String reportName) {
         String filePath = fileStoragePath + "/" + reportName;
 
         File directory = new File(fileStoragePath);
@@ -90,7 +130,7 @@ public class ReportService {
         }
 
         try {
-            generatePDFFromTestScenarios(testScenarios, filePath);
+            generatePDFReport(testScenarios, codeAnalysisResult, filePath);
         } catch (IOException e) {
             throw new ReportGenerationException(getMessage("error.generate.pdf"), e);
         }
@@ -98,17 +138,7 @@ public class ReportService {
         return filePath;
     }
 
-    private void saveReportMetadata(String reportName, String filePath) {
-        Report report = new Report();
-        report.setReportName(reportName);
-        report.setGeneratedTime(LocalDateTime.now().toString());
-        report.setReportFormat("PDF");
-        report.setFilePath(filePath);
-
-        reportRepository.save(report);
-    }
-
-    private void generatePDFFromTestScenarios(List<TestScenario> testScenarios, String filePath) throws IOException {
+    private void generatePDFReport(List<TestScenario> testScenarios, String codeAnalysisResult, String filePath) throws IOException {
         try (PDDocument document = new PDDocument()) {
             PDPage page = new PDPage();
             document.addPage(page);
@@ -118,7 +148,15 @@ public class ReportService {
                 contentStream.setFont(PDType1Font.HELVETICA, 12);
                 contentStream.newLineAtOffset(100, 700);
 
-                contentStream.showText("JUnit Test Report");
+                contentStream.showText("Comprehensive Report");
+                contentStream.newLineAtOffset(0, -20);
+
+                contentStream.showText("Code Analysis Result:");
+                contentStream.newLineAtOffset(0, -20);
+                contentStream.showText(codeAnalysisResult != null ? codeAnalysisResult : "No analysis result available");
+                contentStream.newLineAtOffset(0, -40);
+
+                contentStream.showText("Generated Test Scenarios:");
                 contentStream.newLineAtOffset(0, -20);
 
                 for (TestScenario scenario : testScenarios) {
@@ -135,6 +173,16 @@ public class ReportService {
 
             document.save(filePath);
         }
+    }
+
+    private void saveReportMetadata(String reportName, String filePath) {
+        Report report = new Report();
+        report.setReportName(reportName);
+        report.setGeneratedTime(LocalDateTime.now().toString());
+        report.setReportFormat("PDF");
+        report.setFilePath(filePath);
+
+        reportRepository.save(report);
     }
 
     public Report getReportById(Long id) {

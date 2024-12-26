@@ -20,16 +20,11 @@ public class RapportController {
         this.reportService = reportService;
     }
 
-    // Generate report directly from user-provided code
+    // Generate comprehensive report directly from user-provided code
     @PostMapping("/generate-from-code")
     public ResponseEntity<String> generateReportFromCode(@RequestBody String code) {
-        // Step 1: Fetch test scenarios from the Test Generator Microservice
-        List<TestScenario> testScenarios = reportService.fetchTestScenarios(code);
-
-        // Step 2: Generate a report from the fetched test scenarios
-        String reportPath = reportService.generateReportFromTestResults(testScenarios);
-
-        return ResponseEntity.ok("Report generated at: " + reportPath);
+        String reportPath = reportService.generateComprehensiveReport(code);
+        return ResponseEntity.ok("Report generated successfully at: " + reportPath);
     }
 
     // List all generated reports

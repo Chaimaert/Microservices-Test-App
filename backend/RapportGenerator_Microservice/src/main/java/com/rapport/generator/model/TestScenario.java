@@ -1,32 +1,34 @@
 package com.rapport.generator.model;
 
 public class TestScenario {
-    private String testName;
-    private String content;
+    private String methodName;
+    private String testCode;
     private String status;
+    private String errorMessage;
 
-    // Constructor
-    public TestScenario(String testName, String content, String status) {
-        this.testName = testName;
-        this.content = content;
+    // Constructeur
+    public TestScenario(String methodName, String testCode, String status, String errorMessage) {
+        this.methodName = methodName;
+        this.testCode = testCode;
         this.status = status;
+        this.errorMessage = errorMessage;
     }
 
-    // Getters and Setters
-    public String getTestName() {
-        return testName;
+    // Getters et Setters
+    public String getMethodName() {
+        return methodName;
     }
 
-    public void setTestName(String testName) {
-        this.testName = testName;
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
     }
 
-    public String getContent() {
-        return content;
+    public String getTestCode() {
+        return testCode;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTestCode(String testCode) {
+        this.testCode = testCode;
     }
 
     public String getStatus() {
@@ -37,12 +39,21 @@ public class TestScenario {
         this.status = status;
     }
 
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
     @Override
     public String toString() {
         return "TestScenario{" +
-                "testName='" + testName + '\'' +
-                ", content='" + content + '\'' +
+                "methodName='" + methodName + '\'' +
+                ", testCode='" + testCode + '\'' +
                 ", status='" + status + '\'' +
+                ", errorMessage='" + errorMessage + '\'' +
                 '}';
     }
 }

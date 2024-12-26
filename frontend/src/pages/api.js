@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Gateway URL
-const API_BASE_URL = "http://localhost:9090";
+const API_BASE_URL = "http://localhost:9091";
 
 const api = axios.create({
   baseURL: API_BASE_URL,

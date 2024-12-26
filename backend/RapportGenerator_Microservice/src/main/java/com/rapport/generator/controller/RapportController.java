@@ -24,7 +24,7 @@ public class RapportController {
     @PostMapping("/generate-from-code")
     public ResponseEntity<String> generateReportFromCode(@RequestBody String code) {
         String reportPath = reportService.generateComprehensiveReport(code);
-        return ResponseEntity.ok("Report generated successfully at: " + reportPath);
+        return ResponseEntity.ok("Report generated successfully at: " +reportPath);
     }
 
     // List all generated reports

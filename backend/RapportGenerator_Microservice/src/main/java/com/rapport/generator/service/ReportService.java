@@ -77,7 +77,7 @@ public class ReportService {
 
     // Fetch Code Analysis Result from AnalyzeCode Microservice
     public String fetchCodeAnalysis(String code) {
-        logger.info("Fetching code analysis result for code");
+        logger.info("Fetching code analysis result for code: {}", code);
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -145,27 +145,59 @@ public class ReportService {
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
                 contentStream.beginText();
-                contentStream.setFont(PDType1Font.HELVETICA, 12);
-                contentStream.newLineAtOffset(100, 700);
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 14);
+                contentStream.newLineAtOffset(50, 750);
 
+                // Title
                 contentStream.showText("Comprehensive Report");
-                contentStream.newLineAtOffset(0, -20);
+                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                contentStream.newLineAtOffset(0, -30);
 
+                // Code Analysis Result Section
                 contentStream.showText("Code Analysis Result:");
                 contentStream.newLineAtOffset(0, -20);
-                contentStream.showText(codeAnalysisResult != null ? codeAnalysisResult : "No analysis result available");
-                contentStream.newLineAtOffset(0, -40);
+                if (codeAnalysisResult != null) {
+                    contentStream.setFont(PDType1Font.HELVETICA_OBLIQUE, 10);
+                    String[] analysisLines = codeAnalysisResult.split("\n");
+                    for (String line : analysisLines) {
+                        contentStream.showText(line.trim());
+                        contentStream.newLineAtOffset(0, -15);
+                    }
+                } else {
+                    contentStream.showText("No analysis result available.");
+                }
+                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                contentStream.newLineAtOffset(0, -30);
 
+                // Test Scenarios Section
                 contentStream.showText("Generated Test Scenarios:");
                 contentStream.newLineAtOffset(0, -20);
 
-                for (TestScenario scenario : testScenarios) {
-                    contentStream.showText("Test Name: " + scenario.getTestName());
-                    contentStream.newLineAtOffset(0, -20);
-                    contentStream.showText("Content: " + scenario.getContent());
-                    contentStream.newLineAtOffset(0, -20);
-                    contentStream.showText("Status: " + scenario.getStatus());
-                    contentStream.newLineAtOffset(0, -40);
+                if (testScenarios.isEmpty()) {
+                    contentStream.showText("No test scenarios generated.");
+                } else {
+                    for (TestScenario scenario : testScenarios) {
+                        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 10);
+                        contentStream.showText("Method Name: " + scenario.getMethodName());
+                        contentStream.newLineAtOffset(0, -15);
+
+                        contentStream.setFont(PDType1Font.HELVETICA, 10);
+                        contentStream.showText("Test Code:");
+                        contentStream.newLineAtOffset(0, -15);
+                        String[] testCodeLines = scenario.getTestCode().split("\n");
+                        for (String line : testCodeLines) {
+                            contentStream.showText("  " + line.trim());
+                            contentStream.newLineAtOffset(0, -15);
+                        }
+
+                        contentStream.newLineAtOffset(0, -10);
+                        contentStream.showText("Status: " + scenario.getStatus());
+                        if (scenario.getErrorMessage() != null) {
+                            contentStream.newLineAtOffset(0, -15);
+                            contentStream.showText("Error Message: " + scenario.getErrorMessage());
+                        }
+                        contentStream.newLineAtOffset(0, -30); // Add spacing between test scenarios
+                    }
                 }
 
                 contentStream.endText();
@@ -174,7 +206,6 @@ public class ReportService {
             document.save(filePath);
         }
     }
-
     private void saveReportMetadata(String reportName, String filePath) {
         Report report = new Report();
         report.setReportName(reportName);

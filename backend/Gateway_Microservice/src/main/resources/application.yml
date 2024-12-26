@@ -1,5 +1,5 @@
 server:
-  port: 9090  # The Gateway Microservice will run on port 8080
+  port: 9091  # The Gateway Microservice will run on port 8080
 spring:
   cloud:
     gateway:
@@ -7,7 +7,7 @@ spring:
         corsConfigurations:
           '[/**]':
             allowedOrigins:
-              - "http://localhost:3000"
+              - "http://localhost:3001"
             allowedMethods:
               - GET
               - POST

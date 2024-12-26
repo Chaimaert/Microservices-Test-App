@@ -20,11 +20,7 @@ public class CodeAnalysisService {
     @Value("${spring.ia.openai.api-key}")
     private String apiKey;
 
-    /**private final RestTemplate restTemplate;
 
-    public CodeAnalysisService(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }**/
     public List<TestScenario> analyzeCode(String code) {
         String prompt = "Analyse ce code et génère uniquement les tests unitaires sans commentaires ni explications :\n\n" + code;
         List<TestScenario> scenarios = new ArrayList<>();
@@ -62,9 +58,9 @@ public class CodeAnalysisService {
 
                     // Formater le contenu pour l'affichage
                     String formattedContent = generatedContent
-                            .replaceAll("\\n", " ") // Remplacer les nouvelles lignes par des espaces
-                            .replaceAll("\\s+", " ") // Remplacer les espaces multiples par un seul espace
-                            .trim(); // Supprimer les espaces en début et fin
+                            .replaceAll("@Test", "@Test\n") // Ajouter un retour à la ligne après chaque @Test
+                            .replaceAll(";", ";\n"); // Ajouter un retour à la ligne après chaque point-virgule
+
 
                     System.out.println("Contenu généré : " + formattedContent);
                     scenarios.add(new TestScenario("GeneratedTest", formattedContent, "Pending"));

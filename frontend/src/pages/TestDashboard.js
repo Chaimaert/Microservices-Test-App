@@ -8,9 +8,9 @@ import {
 import "./TestDashboard.css";
 
 function TestDashboard() {
-  const [code, setCode] = useState(""); // User's input code
-  const [output, setOutput] = useState(""); // Output for tests/analysis
-  const [loading, setLoading] = useState(false); // Loading state
+  const [code, setCode] = useState(""); // Code saisi par l'utilisateur
+  const [output, setOutput] = useState(""); // Sortie pour les tests/analyse
+  const [loading, setLoading] = useState(false); // État de chargement
   const navigate = useNavigate();
 
   const handleCodeChange = (event) => {
@@ -19,11 +19,14 @@ function TestDashboard() {
 
   const handleGenerateTest = async () => {
     setLoading(true);
+    setOutput(""); // Effacer la sortie précédente
     try {
       const result = await fetchGeneratedTest({ code });
-      setOutput(result); // Display test output
+      // Extraire le testCode du résultat
+      const testCode = result[0]?.testCode || "Aucun code de test généré."; // Gérer le cas où le résultat est vide
+      setOutput(testCode); // Afficher uniquement le testCode
     } catch (error) {
-      setOutput("Error generating test. Please try again.");
+      setOutput("Erreur lors de la génération du test. Veuillez réessayer.");
     } finally {
       setLoading(false);
     }
@@ -32,22 +35,30 @@ function TestDashboard() {
   const handleAnalyzeCode = async () => {
     setLoading(true);
     try {
-      const analysisResult = await fetchTestAnalysis({ code });
-      setOutput(analysisResult); // Display analysis output
+        const analysisResult = await fetchTestAnalysis({ code });
+
+        // Vérifiez que analysisResult est un objet
+        if (analysisResult && typeof analysisResult === 'object') {
+            // Extraire uniquement le message d'analyse
+            const analysisMessage = analysisResult.analysis || "Aucune analyse disponible.";
+            setOutput((prevOutput) => prevOutput + "\nAnalyse : " + analysisMessage); // Ajouter à la sortie existante
+        } else {
+            setOutput("Aucune analyse disponible.");
+        }
     } catch (error) {
-      setOutput("Error analyzing code. Please try again.");
+        setOutput("Erreur lors de l'analyse du code. Veuillez réessayer.");
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
 
   const handleGenerateReport = async () => {
     setLoading(true);
     try {
-      await generateReportFromCode(code); // Generate the report
-      navigate("/reports"); // Redirect to the reports page
+      await generateReportFromCode(code); // Générer le rapport
+      navigate("/reports"); // Rediriger vers la page des rapports
     } catch (error) {
-      alert("Error generating report. Please try again.");
+      alert("Erreur lors de la génération du rapport. Veuillez réessayer.");
     } finally {
       setLoading(false);
     }
@@ -61,28 +72,26 @@ function TestDashboard() {
 
       <div className="dashboard-content">
         <div className="dashboard-left">
-          <h3>Enter Your Code to Test</h3>
+          <h3>Entrez votre code à tester</h3>
           <textarea
             value={code}
             onChange={handleCodeChange}
-            placeholder="Write or paste your source code here..."
+            placeholder="Écrivez ou collez votre code source ici..."
           />
           <div className="button-container">
             <button onClick={handleGenerateTest} disabled={loading}>
-              Generate Test
+              Générer le Test
+            </button>
+            <button onClick={handleAnalyzeCode} disabled={loading}>
+              Analyser le Code
             </button>
           </div>
         </div>
 
         <div className="dashboard-right">
-          <h3>Output</h3>
+          <h3>Sortie</h3>
           <div className="output-container">
-            <p>{output || "The result of your code analysis will appear here."}</p>
-          </div>
-          <div className="button-container">
-            <button onClick={handleAnalyzeCode} disabled={loading}>
-              Analyze Code
-            </button>
+            <pre>{output || "Le résultat de votre analyse apparaîtra ici."}</pre>
           </div>
         </div>
       </div>
@@ -93,7 +102,7 @@ function TestDashboard() {
           onClick={handleGenerateReport}
           disabled={loading}
         >
-          Generate Report
+          Générer le Rapport
         </button>
       </div>
     </div>

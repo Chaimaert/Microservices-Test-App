@@ -9,7 +9,7 @@ Bienvenue dans le projet AI Test Automation Platform, une plateforme conçue pou
 - [Architecture](#architecture)
 - [Technologies utilisées](#technologies-utilisées)
 - [Prérequis](#prérequis)
-- [API Endpoints](#api-endpoints)
+- [Démonstration](#démonstration)
   
 ## Problématique
 
@@ -70,3 +70,8 @@ Le projet est basé sur une architecture microservices. Chaque microservice gèr
 - MySQL, PostGress : Pour le stockage des données.
 
 ## Prérequis
+
+
+
+## Démonstration
+

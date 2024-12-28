@@ -1,9 +1,9 @@
 /* General Wrapper Styling */
 .reports-wrapper {
     padding: 30px; /* Increase padding for more space */
-    width: 60%; /* Set width to 90% of the page */
-    max-width: 1200px; /* Increase max-width to make it larger */
-    margin: 30px auto; /* Centered with some margin from top */
+    width: 60%; /* Set width to 60% of the page */
+    max-width: 1200px; /* Maximum width */
+    margin: 30px auto; /* Centered with margin from top */
     background-color: #e0f7fa; /* Soft teal background */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -26,14 +26,15 @@
 /* Individual Report Items */
 .report-item {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items */
     margin-bottom: 16px;
     padding: 20px; /* Increased padding for a bit more space */
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #ffffff; /* White background for cards */
     transition: box-shadow 0.3s ease-in-out, transform 0.2s ease;
+    width: 100%; /* Full width of the parent container */
 }
 
 .report-item:hover {
@@ -42,15 +43,13 @@
 }
 
 /* Report Text Styling */
-.report-text {
-    font-size: 1.3em; /* Slightly larger font size */
+.report-id {
+    font-size: 1.5em; /* Slightly larger font size for the ID */
     color: #004d40; /* Dark teal */
-    font-weight: 500;
-    flex: 1;
-    margin-right: 15px; /* Space between text and button */
+    font-weight: bold; /* Bold for emphasis */
+    margin-bottom: 10px; /* Space below the ID */
 }
 
-/* Download Button Styling */
 /* Download Button Styling */
 .download-button {
     background-color: #0e3e55; /* Teal button */
@@ -63,16 +62,15 @@
     cursor: pointer;
     width: auto; /* Ensure button is only as wide as its content */
     transition: background-color 0.3s ease, transform 0.2s ease;
-    text-align: center; /* Ensure the text is centered */
 }
 
 .download-button:hover {
-    background-color: #0e3e55; /* Darker teal */
+    background-color: #0b2c38; /* Darker teal on hover */
     transform: scale(1.05);
 }
 
 .download-button:active {
-    background-color: #0e3e55; /* Very dark teal */
+    background-color: #0a1f25; /* Very dark teal on click */
     transform: scale(0.95);
 }
 

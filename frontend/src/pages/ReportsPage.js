@@ -26,11 +26,7 @@ function ReportsPage() {
   const handleDownload = async (reportId) => {
     try {
       const fileData = await downloadReport(reportId);
-
-      // Create a Blob from the file data
       const blob = new Blob([fileData], { type: "application/pdf" });
-
-      // Create a temporary URL and trigger the download
       const link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
       link.download = `Report-${reportId}.pdf`;
@@ -50,8 +46,10 @@ function ReportsPage() {
         <div className="reports-list">
           {reports.map((report) => (
             <div key={report.id} className="report-item">
-              <span>{report.name}</span>
-              <button onClick={() => handleDownload(report.id)}>Download</button>
+              <div className="report-info">
+                <span className="report-id">Rapport : {report.id}</span>
+              </div>
+              <button onClick={() => handleDownload(report.id)}>DOWNLOAD</button>
             </div>
           ))}
         </div>

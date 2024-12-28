@@ -116,10 +116,12 @@ Le projet est basé sur une architecture microservices. Chaque microservice gèr
         npm install
         
   4.3 Lancer l'application : 
-        npm install
+        npm start
   
 ## Démonstration
 
-https://github.com/user-attachments/assets/103d9d78-2598-4ea2-bcd4-faa1193e7cf8
+https://github.com/user-attachments/assets/57e8be96-87f2-48df-846a-12e5516475a6
+
+
 
 

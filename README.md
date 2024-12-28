@@ -1,5 +1,4 @@
 
-https://github.com/user-attachments/assets/5e8649ef-9845-40f9-8e2c-a2ab78741b61
 # AI Test Automation Platform
 
 Bienvenue dans le projet AI Test Automation Platform, une plateforme conçue pour automatiser les tests logiciels à l'aide de microservices et d'une interface intuitive. Ce projet utilise des technologies modernes comme React pour le frontend et Spring Boot pour le backend. Voici une documentation détaillée pour comprendre et démarrer avec le projet.

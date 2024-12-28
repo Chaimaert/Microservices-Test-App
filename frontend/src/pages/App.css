@@ -1,0 +1,79 @@
+/* App.css */
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Layout Container */
+.app {
+  background-color:#a1bdc9; /* Correct path to your image */
+  background-size: 100%; /* Scales the image to 50% of its original size */
+  background-position: center;
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Set the height to 100% of the viewport height */
+  overflow: hidden; /* Hide any overflow */
+}
+
+/* Header Styles */
+.app-header {
+  text-align: center;
+  padding: 6px 6px;
+  background:#0e3e55; /* Dark purple background */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0; /* Prevent shrinking of header */
+  position: sticky;
+  top: 0;
+  z-index: 1; /* Ensure the header is on top */
+}
+
+.app-header h1 {
+  color: #ffffff; /* Light purple color */
+  font-size: 1.5rem; /* Larger font size */
+}
+
+/* Content Area */
+.app-content {
+  flex-grow: 1; /* Allow content area to grow */
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2c6a87; /* Light background for content */
+  flex-direction: column; /* Stack Login/Signup components */
+  overflow-y: auto; /* Allow vertical scrolling within the content area */
+  max-height: calc(100vh - 80px); /* Subtract the header and footer heights */
+}
+
+/* Footer Styles */
+.app-footer {
+  text-align: center;
+  padding: 10px 10px;
+  background:#0e3e55; /* Dark purple background */
+  color: #ffffff;
+  font-size: 1rem;
+  flex-shrink: 0; /* Prevent shrinking of footer */
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+}
+
+/* Button Styling for Switch Between Login/Signup */
+button {
+  padding: 10px 20px;
+  background-color: #b82121;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #7d99ca;
+}

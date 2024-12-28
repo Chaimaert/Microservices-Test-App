@@ -1,0 +1,107 @@
+/* Wrapper styles for the Signup page */
+.signup-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Box styles for the Signup form and image */
+.signup-box {
+  display: flex;
+  width: 105%;
+  height: 70%;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 5px 5px 15px;
+}
+
+/* Left Section for the form */
+.left-side {
+  width: 50%;
+  background-color: #155a7a; /* Same as Login */
+  color: #ffffff; /* Same as Login */
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Right Section for the image */
+.right-side {
+  width: 50%;
+  background-color: #031a75; /* Same as Login */
+}
+
+.right-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Input Fields */
+input[type="text"], input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #11cbac;
+  border-radius: 15px;
+  background-color: #fff;
+  color: #333;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #5684b3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #2575fc;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.input-icon {
+  font-size: 1.2rem;
+  color: #11cbac;
+  margin-right: 10px;
+}
+
+.input-container input {
+  flex-grow: 1;
+  padding: 15px;
+  border: 1px solid #11a0cb;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #444444;
+  font-size: 1rem;
+}
+
+/* Login Prompt Link */
+.login-prompt {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+.login-prompt a {
+  color: #11cbac;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-prompt a:hover {
+  text-decoration: underline;
+}
